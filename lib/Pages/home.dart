@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
           _categorySection(),
           SizedBox(height: 40,),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -58,8 +59,28 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 15,),
+              Container(
+                // color: Colors.blue,
+                height: 240,
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 210,
+                        height: 240,
+                        decoration: BoxDecoration(
+                          color: diets[index].boxColor.withOpacity(0.5),
+                          borderRadius:BorderRadius.circular(20),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(width: 25,),
+                    itemCount: diets.length,
+                    scrollDirection: Axis.horizontal,
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
