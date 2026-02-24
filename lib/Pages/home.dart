@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:landing_page_01/models/category_model.dart';
 import 'package:landing_page_01/models/diet_recomendation.dart';
+import 'package:landing_page_01/models/popular_model.dart';
 
 class HomePage extends StatefulWidget {
    HomePage({super.key});
@@ -13,10 +14,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<CategoryModel> categories = [];
   List<DietModel> diets = [];
+  List<PopularDietsModel> popularDiets = [];
 
   void _getInitialInfo() {
     categories = CategoryModel.getCategories();
     diets = DietModel.getDiets();
+    popularDiets = PopularDietsModel.getPopularDiets();
   }
 
   @override
@@ -38,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 40,),
           _dietSection(),
           const SizedBox(height: 40,),
-          SizedBox(height: 25,),
+          // SizedBox(height: 40,),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -46,35 +49,79 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(left: 20),
                 child: Text(
                   'Best Sellers',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600
-                    ),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-              SizedBox(height: 10,),
-              Container(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: SvgPicture.asset('assets/icons/salmon-nigiri.svg'),
-                    ),
-                    SizedBox(width: 15,),
-                    Text(
-                      'Salmon Nigiri',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600
+              SizedBox(height: 15,),
+              ListView.separated(
+                  itemCount: popularDiets.length,
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) => SizedBox(height: 25,),
+                  padding: EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      // color: Colors.blue,
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SvgPicture.asset(
+                              popularDiets[index].iconPath,
+                              height: 65,
+                              width: 65,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                popularDiets[index].name,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                popularDiets[index].level + ' | ' + popularDiets[index].duration + ' | ' + popularDiets[index].calorie,
+                                style: TextStyle(
+                                  color: Color(0xff7B6F72),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 13,
+                                ),
+                              )
+                            ],
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.chevron_right),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xfff1D1617).withOpacity(0.07),
+                            offset: Offset(0, 10),
+                            blurRadius: 0
+                          )
+                        ]
+                      ),
+                    );
+                  },
               ),
             ],
           ),
+          SizedBox(height: 20,),
         ],
       ),
     );
