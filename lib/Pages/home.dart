@@ -356,11 +356,15 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           margin: const EdgeInsets.all(10),
           alignment: Alignment.center,
-          child: SvgPicture.asset(
-            'assets/icons/Arrow - Left 2.svg',
-            height: 20,
-            width: 20,
+          child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.chevron_left),
           ),
+          // child: SvgPicture.asset(
+          //   'assets/icons/Arrow - Left 2.svg',
+          //   height: 20,
+          //   width: 20,
+          // ),
           decoration: BoxDecoration(
             color: const Color(0xffF7F8F8),
             borderRadius: BorderRadius.circular(10),
@@ -374,11 +378,15 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.all(10),
             alignment: Alignment.center,
             width: 37,
-            child: SvgPicture.asset(
-              'assets/icons/dots.svg',
-              height: 5,
-              width: 5,
+            child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_horiz)
             ),
+            // child: SvgPicture.asset(
+            //   'assets/icons/dots.svg',
+            //   height: 5,
+            //   width: 5,
+            // ),
             decoration: BoxDecoration(
               color: const Color(0xffF7F8F8),
               borderRadius: BorderRadius.circular(10),
